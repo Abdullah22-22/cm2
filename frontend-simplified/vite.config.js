@@ -23,7 +23,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://maraton2.onrender.com/",
+        target: "https://cm2-fu1g.onrender.com",
         changeOrigin: true,
       },
     },
