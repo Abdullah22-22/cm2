@@ -16,7 +16,10 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
+
+  // Vercel domains
   "https://cm2-phi.vercel.app",
+  "https://cm2-5tw5akwcg-abs-projects-05ca1b34.vercel.app",
 ];
 
 const corsOptions = {
