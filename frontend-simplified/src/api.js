@@ -1,7 +1,9 @@
 import axios from "axios";
 
+
+
 const api = axios.create({
-  baseURL: "/api",
+baseURL: "https://cm2-fu1g.onrender.com",
 });
 
 api.interceptors.request.use((config) => {

@@ -1,32 +1,59 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const app = express();
 const morgan = require("morgan");
-// const userRouter = require("./routes/userRouter");
+const cors = require("cors");
+
 const jobRouter = require("./routes/jobRoutes");
+const userRouter = require("./routes/userRouter");
 const { unknownEndpoint, errorHandler } = require("./middleware/customMiddleware");
 const connectDB = require("./config/db");
-const cors = require("cors");
-const loginRouter = require('./routes/userRouter');
 
-// Middlewares
-app.use(cors())
+const app = express();
+
+/* ================= CORS CONFIG ================= */
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://cm2-phi.vercel.app",
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false, 
+};
+
+app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+
+
 connectDB();
 
-// Use the userRouter for all /users routes
-// app.use("/api/users", userRouter);
-app.use("/api/jobs", jobRouter);
-app.use("/api/users",loginRouter)
+
+app.use("/jobs", jobRouter);
+app.use("/users", userRouter);
+
 
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
+
 const port = process.env.PORT || 4000;
-// Start the server
+
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });

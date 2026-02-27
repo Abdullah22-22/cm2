@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, data } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 const EditJobPage = () => {
   const [job, setJob] = useState(null); // Initialize job state
   const [loading, setLoading] = useState(true); // Loading state
@@ -35,7 +36,7 @@ const EditJobPage = () => {
      const token = localStorage.getItem("token");
     if (!token) throw new Error("No token found. Please login again.");
     try {
-      const res = await fetch(`/api/jobs/${job.id}`, {
+      const res = await fetch(`${API}/jobs/${job.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +58,7 @@ const EditJobPage = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`/api/jobs/${id}`);
+        const res = await fetch(`https://cm2-fu1g.onrender.com/jobs/${id}`);
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }

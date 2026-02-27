@@ -3,6 +3,8 @@ import { FaArrowLeft, FaMapMarker } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+const API = import.meta.env.VITE_API_URL;
+
 
 const JobPage = () => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const JobPage = () => {
   const deleteJob = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`/api/jobs/${id}`, {
+      const res = await fetch(`https://cm2-fu1g.onrender.comjobs/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -43,7 +45,7 @@ const JobPage = () => {
     const fetchJob = async () => {
       try {
 
-        const res = await fetch(`/api/jobs/${id}`, {
+        const res = await fetch(`https://cm2-fu1g.onrender.com/jobs/${id}`, {
           credentials: "include",
         });
         if (!res.ok) {

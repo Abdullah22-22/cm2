@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+const API = import.meta.env.VITE_API_URL;
 
 const AddJobPage = () => {
   const [title, setTitle] = useState("");
@@ -36,7 +37,7 @@ const AddJobPage = () => {
         return false;
       }
 
-      const res = await fetch("/api/jobs", {
+      const res = await fetch(`https://cm2-fu1g.onrender.com/jobs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

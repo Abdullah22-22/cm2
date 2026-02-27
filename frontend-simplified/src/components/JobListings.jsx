@@ -8,7 +8,9 @@ const JobListings = ({ isHome = false }) => {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const apiUrl = isHome ? '/api/jobs?_limit=3' : '/api/jobs';
+      const apiUrl = isHome
+        ? 'https://cm2-fu1g.onrender.com/jobs?_limit=3'
+        : 'https://cm2-fu1g.onrender.com/jobs';
       try {
 
         const token = localStorage.getItem("token");

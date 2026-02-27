@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+const API = import.meta.env.VITE_API_URL;
+
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const SignUpPage = () => {
     setLoading(true);
 
     try {
-     const res = await fetch("/api/users/register", {
+     const res = await fetch(`https://cm2-fu1g.onrender.com/users/register`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
