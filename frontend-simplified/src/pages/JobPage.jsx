@@ -24,7 +24,7 @@ const JobPage = () => {
   const deleteJob = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`https://cm2-fu1g.onrender.comjobs/${id}`, {
+      const res = await fetch(`https://cm2-fu1g.onrender.com/jobs/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,8 +45,9 @@ const JobPage = () => {
     const fetchJob = async () => {
       try {
 
+        const token = localStorage.getItem("token");
         const res = await fetch(`https://cm2-fu1g.onrender.com/jobs/${id}`, {
-          credentials: "include",
+          headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -64,7 +65,7 @@ const JobPage = () => {
   }, [id]);
 
   const onDeleteClick = async () => {
-  const jobId = job?._id || job?.id;
+    const jobId = job?._id || job?.id;
 
     const confirm = window.confirm(
       "Are you sure you want to delete this listing?"
@@ -73,12 +74,12 @@ const JobPage = () => {
     if (!confirm) return;
 
     try {
-    await deleteJob(jobId); 
-    toast.success("Job deleted successfully");
-    navigate("/jobs");
-  } catch (err) {
-    toast.error(err.message || "Failed to delete job");
-  }
+      await deleteJob(jobId);
+      toast.success("Job deleted successfully");
+      navigate("/jobs");
+    } catch (err) {
+      toast.error(err.message || "Failed to delete job");
+    }
   };
 
   if (loading) return <p>Loading...</p>;

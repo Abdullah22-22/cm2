@@ -20,23 +20,13 @@ const EditJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
 
-  // Update Job
-  // const updateJob = async (job) => {
-  //   const res = await fetch(`/api/jobs/${job.id}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(job),
-  //   });
-  //   return res.ok;
-  // };
+
 
   const updateJob = async (jobId, payload) => {
      const token = localStorage.getItem("token");
     if (!token) throw new Error("No token found. Please login again.");
     try {
-      const res = await fetch(`${API}/jobs/${job.id}`, {
+      const res = await fetch(`https://cm2-fu1g.onrender.com/jobs/${jobId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +94,7 @@ const EditJobPage = () => {
       },
     };
 
-    const success = await updateJob(updatedJob);
+    const success = await updateJob(id,updatedJob);
     if (success) {
       toast.success("Job Updated Successfully");
       navigate(`/jobs/${id}`);
